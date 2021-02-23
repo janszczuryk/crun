@@ -1,0 +1,16 @@
+#!/bin/sh
+
+filename=$(basename -- "$1")
+out="${filename%.*}"
+
+if [ -z "$1" ]; then
+    echo "Proszę podać nazwę pliku (*.c)!"
+    exit
+fi
+
+if [ ! -f "$1" ]; then
+    echo "Plik: $1 nie istnieje!"
+    exit
+fi
+
+gcc "$1" -o $out -std=c99 -lm && ./$out
